@@ -36,7 +36,7 @@ public class UserController {
      * @return the users by id
      * @throws EntityNotFoundException the resource not found exception
      */
-    @GetMapping("/users/{id}")
+    @GetMapping("/user/{id}")
     public ResponseEntity<User> getUsersById(@PathVariable(value = "id") Long userId)
             throws EntityNotFoundException {
         User user =
