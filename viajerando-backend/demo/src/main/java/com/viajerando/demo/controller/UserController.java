@@ -85,7 +85,9 @@ public class UserController {
     public ResponseEntity<Boolean> login(@RequestParam String email, @RequestParam String password) {
 
         Optional<User> optUsuario = userRepository.findByEmail(email);
+            System.out.println("Antes do if");
         if (optUsuario.isEmpty()) {
+            System.out.println("Entrou no vazio");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
         }
 
