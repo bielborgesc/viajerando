@@ -5,8 +5,9 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterModule, RouterStateSnapshot } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpsRequestInterceptor, Interceptor } from './core/interceptors/HttpsRequestInterceptor';
 
 @NgModule({
   declarations: [
@@ -19,9 +20,12 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     RouterModule,
     HttpClientModule,
-    HomeModule
+    HomeModule,
+    Interceptor,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: 'HTTP_INTERCEPTORS', useClass: HttpsRequestInterceptor, multi: true }
+  ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

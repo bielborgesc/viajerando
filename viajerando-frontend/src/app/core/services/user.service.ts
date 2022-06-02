@@ -1,24 +1,27 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { User } from 'src/app/shared/interfaces/user';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private readonly API: string = 'localhost:8080';
+  // private readonly API: string = 'localhost:8080';
 
   constructor(
     private readonly http: HttpClient,
   ) { }
 
-  createUser(userRegisterForm: any): any {
-    this.http.post(`${this.API}/viajerando/user`, {user: userRegisterForm})
+  createUser(userRegisterForm: User) {
+    console.log("Criando usuario service")
+    return this.http.post(`${environment.url}/users`, userRegisterForm)
   }
 
   updateUser(userUpdateForm: any): any {
-    this.http.put(`${this.API}/viajerando/user`, {user: userUpdateForm})
+    return this.http.put(`${environment.url}/users`, {user: userUpdateForm})
   }
 
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from 'src/app/core/services/user.service';
+import { User } from 'src/app/shared/interfaces/user';
 
 @Component({
   selector: 'app-register',
@@ -14,16 +16,13 @@ export class RegisterComponent implements OnInit {
     email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
     cpf: new FormControl('', Validators.required),
-    logradouro: new FormControl('', Validators.required),
-    cidade: new FormControl('', Validators.required),
-    numero: new FormControl('', Validators.required),
-    cep: new FormControl('', Validators.required),
-    telefone: new FormControl('', Validators.required)
+    phonenumber: new FormControl('', Validators.required)
   });
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
-    private readonly router: Router
+    private readonly router: Router,
+    private userService: UserService,
   ) { }
 
   ngOnInit(): void {
@@ -31,6 +30,22 @@ export class RegisterComponent implements OnInit {
   }
 
   sendRegisterForm(): void {
+    const userForm: User = {
+      username: this.registerForm.get('username')?.value,
+      passwoard: this.registerForm.get('email')?.value,
+      email: this.registerForm.get('password')?.value,
+      cpf: this.registerForm.get('cpf')?.value,
+      telefone: this.registerForm.get('phonenumber')?.value
+    };
+
+    this.userService.createUser(userForm).subscribe(
+      success => {
+        localStorage.clear();
+        localStorage.setItem("Authorization", Object.values(success)[0])
+      },
+      () => {console.error("ERROR: Falha ao registrar!")}
+    )
+
     console.log(this.registerForm);
   }
 

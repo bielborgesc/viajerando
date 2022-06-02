@@ -11,17 +11,25 @@ label, button {
   font-weight: 500;
 }
 
-.btn-login {
-  background-color: rgb(255, 136, 0);
-  color: #FFF;
-}
-
-.btn-register {
-  background-color: rgb(15, 76, 104);
-  color: #FFF;
-}
-
 button:hover {
   transform: scale(1.015);
+}
+
+.buttons-area {
+  width: 100%;
+  display: flex;
+  .btn-login {
+    width: 50%;
+    background-color: rgb(15, 76, 104);
+    color: #FFF;
+    margin-right: 4px;
+  }
+
+  .btn-register {
+    width: 50%;
+    background-color: rgb(255, 136, 0);
+    color: #FFF;
+    margin-left: 4px;
+  }
 }
 
