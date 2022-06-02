@@ -1,8 +1,11 @@
 package com.viajerando.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "destiny")
@@ -28,9 +31,14 @@ public class Destiny {
     @Column(name = "descricao", nullable = false)
     private String descricao;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id_fk")
-    private User user;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "enrolledDestiny")
+    private Set<RoadMap> roadMaps = new HashSet<>();
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "admin_id", referencedColumnName = "id")
+    private Admin admin;
 
     public long getId() {
         return id;
@@ -80,4 +88,19 @@ public class Destiny {
         this.descricao = descricao;
     }
 
+    public Set<RoadMap> getRoadMaps() {
+        return roadMaps;
+    }
+
+    public void setRoadMaps(Set<RoadMap> roadMaps) {
+        this.roadMaps = roadMaps;
+    }
+
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
 }

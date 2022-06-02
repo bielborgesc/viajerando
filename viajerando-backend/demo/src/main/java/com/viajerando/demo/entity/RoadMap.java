@@ -1,11 +1,14 @@
 package com.viajerando.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.viajerando.demo.utils.StatusEnum;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "roadmap")
@@ -16,18 +19,34 @@ public class RoadMap {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @DateTimeFormat(iso = ISO.DATE)
-    @Column(name="data_inicial",nullable = false, columnDefinition = "DATE")
-    private LocalDate dataInicial;
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id", referencedColumnName = "id")
+    private User user;
 
-    @DateTimeFormat(iso = ISO.DATE)
-    @Column(name = "data_final",columnDefinition = "DATE")
-    private LocalDate datafinal;
+    @ManyToMany
+    @JoinTable(
+            name = "destiny_enrolled",
+            joinColumns = @JoinColumn(name = "roadmap_id"),
+            inverseJoinColumns = @JoinColumn(name = "destiny_id")
+    )
+    public
+    Set<Destiny> enrolledDestiny = new HashSet<>();
 
-    /*@Column(nullable = false, length = 3)
+    @Column(name = "total_price", nullable = false)
+    private Double totalPrice;
+
+    @DateTimeFormat(pattern="yyyy.MM.dd")
+    @Column(name="initial_date", nullable = false)
+    private LocalDate initialDate;
+
+    @DateTimeFormat(pattern="yyyy.MM.dd")
+    @Column(name = "final_date",  nullable = false)
+    private LocalDate finalDate;
+
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private STATUS status;*/
-
+    private StatusEnum status;
 
     public long getId() {
         return id;
@@ -37,27 +56,43 @@ public class RoadMap {
         this.id = id;
     }
 
-    public LocalDate getDataInicial() {
-        return dataInicial;
+    public LocalDate getInitialDate() {
+        return initialDate;
     }
 
-    public void setDataInicial(LocalDate dataInicial) {
-        this.dataInicial = dataInicial;
+    public void setInitialDate(LocalDate initialDate) {
+        this.initialDate = initialDate;
     }
 
-    public LocalDate getDatafinal() {
-        return datafinal;
+    public LocalDate getFinalDate() {
+        return finalDate;
     }
 
-    public void setDatafinal(LocalDate datafinal) {
-        this.datafinal = datafinal;
-    }
-    /*
-    public STATUS getStatus() {
-        return status;
+    public void setFinalDate(LocalDate finalDate) {
+        this.finalDate = finalDate;
     }
 
-    public void setStatus(STATUS status) {
-        this.status = status;
-    }*/
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public StatusEnum getStatus() {return status;}
+
+    public void setStatus(StatusEnum status) {this.status = status;}
+
+    public User getUser() {return user;}
+
+    public void setUser(User user) {this.user = user;}
+
+    public Set<Destiny> getEnrolledDestiny() {
+        return enrolledDestiny;
+    }
+
+    public void setEnrolledDestiny(Set<Destiny> enrolledDestiny) {
+        this.enrolledDestiny = enrolledDestiny;
+    }
 }

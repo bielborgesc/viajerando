@@ -1,6 +1,8 @@
 package com.viajerando.demo.controller;
 
+import com.viajerando.demo.entity.Admin;
 import com.viajerando.demo.entity.Destiny;
+import com.viajerando.demo.repository.AdminRepository;
 import com.viajerando.demo.repository.DestinyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,19 +15,22 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/viajerando")
+@RequestMapping("/destinies")
 public class DestinyController {
 
     @Autowired
-    private DestinyRepository destinyRepository;
+    DestinyRepository destinyRepository;
 
-    @GetMapping("/destinys")
-    public List<Destiny> getAllDestinys() {
+    @Autowired
+    AdminRepository adminRepository;
+
+    @GetMapping
+    List<Destiny> getAllDestinys() {
         return destinyRepository.findAll();
     }
 
-    @GetMapping("/destiny/{id}")
-    public ResponseEntity<Destiny> getDestinysById(@PathVariable(value = "id") Long id)
+    @GetMapping("/{id}")
+    ResponseEntity<Destiny> getDestinysById(@PathVariable(value = "id") Long id)
             throws EntityNotFoundException {
         Destiny destiny =
                 destinyRepository
@@ -34,15 +39,24 @@ public class DestinyController {
         return ResponseEntity.ok().body(destiny);
     }
 
-    @PostMapping("/destiny")
-    public Destiny createDestiny(@Valid @RequestBody Destiny destiny) {
+    @PutMapping("/{destinyId}/admin/{adminId}")
+    Destiny addDestinyToAdmin(@PathVariable Long destinyId, @PathVariable Long adminId) throws IllegalAccessException {
+        Destiny destiny = destinyRepository.findById(destinyId).orElseThrow(() -> new EntityNotFoundException("Destiny not found on :: " + destinyId));
+        Admin admin = adminRepository.findById(adminId).orElseThrow(() -> new EntityNotFoundException("Destiny not found on :: " + adminId));
+        if(destiny.getAdmin() != null) throw new IllegalAccessException("This Entity has admin");
+        destiny.setAdmin(admin);
+        return destinyRepository.save(destiny);
+    }
+
+    @PostMapping
+     Destiny createDestiny( @RequestBody Destiny destiny) {
         return destinyRepository.save(destiny);
     }
 
 
-    @PutMapping("/destiny/{id}")
-    public ResponseEntity<Destiny> updateDestiny(
-            @PathVariable(value = "id") Long id, @Valid @RequestBody Destiny destinyDetails)
+    @PutMapping("/{id}")
+     ResponseEntity<Destiny> updateDestiny(
+            @PathVariable(value = "id") Long id, @RequestBody Destiny destinyDetails)
             throws EntityNotFoundException {
 
         Destiny destiny =
@@ -59,8 +73,8 @@ public class DestinyController {
         return ResponseEntity.ok(updateDestiny);
     }
 
-    @DeleteMapping("/destiny/{id}")
-    public Map<String, Boolean> deleteUser(@PathVariable(value = "id") Long id) throws Exception {
+    @DeleteMapping("/{id}")
+     Map<String, Boolean> deleteAdmin(@PathVariable(value = "id") Long id) throws Exception {
         Destiny destiny =
                 destinyRepository
                         .findById(id)

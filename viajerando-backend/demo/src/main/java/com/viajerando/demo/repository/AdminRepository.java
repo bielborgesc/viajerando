@@ -1,10 +1,8 @@
 package com.viajerando.demo.repository;
 
-import com.viajerando.demo.entity.RoadMap;
+import com.viajerando.demo.entity.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface RoadMapRepository extends JpaRepository<RoadMap, Long> { }
+public interface AdminRepository extends JpaRepository<Admin, Long> {}

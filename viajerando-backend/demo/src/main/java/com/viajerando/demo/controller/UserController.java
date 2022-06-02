@@ -13,30 +13,16 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/viajerando")
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
-    /**
-     * Get all users list.
-     *
-     * @return the list
-     */
-    @GetMapping("/users")
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
+    @GetMapping
+    List<User> getUsers() {return userRepository.findAll();}
 
-    /**
-     * Gets users by id.
-     *
-     * @param userId the user id
-     * @return the users by id
-     * @throws EntityNotFoundException the resource not found exception
-     */
-    @GetMapping("/user/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<User> getUsersById(@PathVariable(value = "id") Long userId)
             throws EntityNotFoundException {
         User user =
@@ -46,26 +32,10 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
-    /**
-     * Create user user.
-     *
-     * @param user the user
-     * @return the user
-     */
-    @PostMapping("/user")
-    public User createUser(@Valid @RequestBody User user) {
-        return userRepository.save(user);
-    }
+    @PostMapping
+    public User createUser( @RequestBody User user) {return userRepository.save(user);}
 
-    /**
-     * Update user response entity.
-     *
-     * @param userId the user id
-     * @param userDetails the user details
-     * @return the response entity
-     * @throws EntityNotFoundException the resource not found exception
-     */
-    @PutMapping("/user/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(
             @PathVariable(value = "id") Long userId, @Valid @RequestBody User userDetails)
             throws EntityNotFoundException {
@@ -84,18 +54,13 @@ public class UserController {
         user.setNumber(userDetails.getNumber());
         user.setCep(userDetails.getCep());
         user.setTelefone(userDetails.getTelefone());
+        user.setRoadMaps(userDetails.getRoadMaps());
+        user.setId(userDetails.getId());
         final User updatedUser = userRepository.save(user);
         return ResponseEntity.ok(updatedUser);
     }
 
-    /**
-     * Delete user map.
-     *
-     * @param userId the user id
-     * @return the map
-     * @throws Exception the exception
-     */
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/{id}")
     public Map<String, Boolean> deleteUser(@PathVariable(value = "id") Long userId) throws Exception {
         User user =
                 userRepository
