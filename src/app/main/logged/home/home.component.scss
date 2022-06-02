@@ -1,23 +1,24 @@
 @import '../../../../styles.scss';
 
 .nav-bar {
-  height: 170px;
+  height: 250px;
   // background: $gunmetal-theme;
 
-  background-image: url("../../../../assets/img/praia-viajerando-3.jpg");
+  background-image: url("../../../../assets/img/city-viajerando-1.jpg");
+  // background-image: url("../../../../assets/img/person-viajerando-2.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 
   .transparent-bg {
-    background-color: rgba(0, 0, 0, 0.281);
-    height: 170px;
+    background-color: rgba(0, 0, 0, 0.356);
+    height: 250px;
   }
 
   .title {
     font-family: $title-font;
     font-size: 70px;
-    color: rgba(235, 235, 235, 0.815);
+    color: rgb(235, 235, 235);
     cursor: pointer;
   }
 
@@ -47,9 +48,11 @@
 
 .sub-navbar {
   height: 50px;
-  background: $carrot-orange-theme;
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 27%, rgba(5,109,187,1) 71%, rgba(0,212,255,1) 100%);
   color: #FFF;
   font-weight: 600;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
 
   .row {
     div {

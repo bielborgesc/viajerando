@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
-import { User } from 'src/app/shared/interfaces/user';
+import { UserRegister } from 'src/app/shared/interfaces/user';
 
 @Component({
   selector: 'app-register',
@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
   }
 
   sendRegisterForm(): void {
-    const userForm: User = {
+    const userForm: UserRegister = {
       username: this.registerForm.get('username')?.value,
       password: this.registerForm.get('email')?.value,
       email: this.registerForm.get('password')?.value,
@@ -42,8 +42,6 @@ export class RegisterComponent implements OnInit {
 
     this.userService.createUser(userForm).subscribe(
       success => {
-        localStorage.clear();
-        localStorage.setItem("Authorization", Object.values(success)[0])
         this.alertService.showAlertSuccess("Conta criada, efetue o login!");
         this.router.navigate(['/auth/login'])
       },

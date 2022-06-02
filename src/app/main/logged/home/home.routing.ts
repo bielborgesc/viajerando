@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home.component';
 import { MyRoadmapsComponent } from './my-roadmaps/my-roadmaps.component';
 import { DestinationsListComponent } from './destinations-list/destinations-list.component';
+import { AuthGuard } from 'src/app/core/auth/AuthGuard';
+import { NewRoadmapComponent } from './new-roadmap/new-roadmap.component';
 
 const childrens = [
   {
@@ -12,6 +14,10 @@ const childrens = [
   {
     path: 'meus-roteiros',
     component: MyRoadmapsComponent
+  },
+  {
+    path: 'novo-roteiro',
+    component: NewRoadmapComponent
   }
 ]
 
@@ -19,6 +25,7 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+    // canActivateChild: [ AuthGuard ],
     children: childrens
   },
 ];

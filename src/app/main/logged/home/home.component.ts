@@ -21,12 +21,15 @@ export class HomeComponent implements OnInit {
   }
 
   roadmapList(): void {
-    this.router.navigate(['/lista-destinos']);
-    console.log("Teste")
+    this.router.navigate(['/lista-destinos'], {relativeTo: this.activatedRoute});
   }
 
   myDestinations(): void {
     this.router.navigate(['/meus-roteiros'], {relativeTo: this.activatedRoute})
+  }
+
+  newRoadmap(): void {
+    this.router.navigate(['/novo-roteiro'], {relativeTo: this.activatedRoute})
   }
 
 }

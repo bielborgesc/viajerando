@@ -4,13 +4,15 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home.routing';
 import { MyRoadmapsComponent } from './my-roadmaps/my-roadmaps.component';
+import { NewRoadmapComponent } from './new-roadmap/new-roadmap.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
     MyRoadmapsComponent,
-    DestinationsListComponent
+    DestinationsListComponent,
+    NewRoadmapComponent
   ],
   imports: [
     CommonModule,
