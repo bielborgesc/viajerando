@@ -19,6 +19,7 @@ public class AdminControlller {
     @Autowired
     AdminRepository adminRepository;
 
+
     @GetMapping
     List<Admin> getAdmins() {return adminRepository.findAll();}
 
@@ -33,7 +34,9 @@ public class AdminControlller {
     }
 
     @PostMapping
-    Admin createAdmin(@RequestBody Admin admin) {return adminRepository.save(admin);}
+    Admin createAdmin(@RequestBody Admin admin) {
+        return adminRepository.save(admin);
+    }
 
 
     @PutMapping("/{id}")
@@ -50,7 +53,7 @@ public class AdminControlller {
         admin.setCodigoGerencia(adminDetails.getCodigoGerencia());
         admin.setDestinies(adminDetails.getDestinies());
         admin.setEmail(adminDetails.getEmail());
-        admin.setPasswoard(adminDetails.getPasswoard());
+        admin.setPassword(adminDetails.getPassword());
         admin.setUsername(adminDetails.getUsername());
         admin.setId(adminDetails.getId());
         final Admin updatedAdmin = adminRepository.save(admin);

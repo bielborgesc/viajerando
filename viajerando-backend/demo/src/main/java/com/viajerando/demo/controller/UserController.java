@@ -4,6 +4,7 @@ import com.viajerando.demo.entity.User;
 import com.viajerando.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
@@ -17,7 +18,13 @@ import java.util.Map;
 public class UserController {
 
     @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder encoder;
+
+    public UserController(UserRepository userRepository, PasswordEncoder encoder) {
+        this.userRepository = userRepository;
+        this.encoder = encoder;
+    }
 
     @GetMapping
     List<User> getUsers() {return userRepository.findAll();}
@@ -33,7 +40,10 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser( @RequestBody User user) {return userRepository.save(user);}
+    public User createUser( @RequestBody User user) {
+        user.setPassword(encoder.encode(user.getPassword()));
+        return userRepository.save(user);
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(
@@ -47,12 +57,8 @@ public class UserController {
 
         user.setUsername(userDetails.getUsername());
         user.setEmail(userDetails.getEmail());
-        user.setPasswoard(userDetails.getPasswoard());
-        user.setCpf(userDetails.getcpf());
-        user.setPublicPlace(userDetails.getPublicPlace());
-        user.setCity(userDetails.getCity());
-        user.setNumber(userDetails.getNumber());
-        user.setCep(userDetails.getCep());
+        user.setPassword(encoder.encode(userDetails.getPassword()));
+        user.setCpf(userDetails.getcpf());;
         user.setTelefone(userDetails.getTelefone());
         user.setRoadMaps(userDetails.getRoadMaps());
         user.setId(userDetails.getId());

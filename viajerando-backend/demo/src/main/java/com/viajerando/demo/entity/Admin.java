@@ -18,8 +18,8 @@ public class Admin {
     @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "passwoard", nullable = false)
-    private String passwoard;
+    @Column(name = "password", nullable = false)
+    private String password;
 
     @Column(name = "email", nullable = false)
     private String email;
@@ -58,12 +58,12 @@ public class Admin {
         this.email = email;
     }
 
-    public String getPasswoard() {
-        return email;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswoard(String passwoard) {
-        this.passwoard = passwoard;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getCpf() {
