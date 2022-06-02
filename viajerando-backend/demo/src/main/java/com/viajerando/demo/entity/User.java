@@ -1,11 +1,8 @@
 package com.viajerando.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,26 +17,14 @@ public class User {
     @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "passwoard", nullable = false)
-    private String passwoard;
+    @Column(name = "password", nullable = false)
+    private String password;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @Column(name = "cpf", nullable = false)
     private String cpf;
-
-    @Column(name = "public_place", nullable = false)
-    private String publicPlace;
-
-    @Column(name = "city", nullable = false)
-    private String city;
-
-    @Column(name = "number", nullable = false)
-    private Long number;
-
-    @Column(name = "cep", nullable = false)
-    private String cep;
 
     @Column(name = "telefone", nullable = false)
     private String telefone;
@@ -71,12 +56,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPasswoard() {
-        return email;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswoard(String passwoard) {
-        this.passwoard = passwoard;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getcpf() {
@@ -85,38 +70,6 @@ public class User {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    public String getPublicPlace() {
-        return publicPlace;
-    }
-
-    public void setPublicPlace(String publicPlace) {
-        this.publicPlace = publicPlace;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public Long getNumber() {
-        return number;
-    }
-
-    public void setNumber(Long number) {
-        this.number = number;
-    }
-
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
     }
 
     public String getTelefone() {
