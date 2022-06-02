@@ -23,12 +23,4 @@ public class DemoApplication {
 		return encoder;
 	}
 
-	@EnableWebSecurity
-	public static class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-		@Override
-		protected void configure(HttpSecurity http) throws Exception {
-			http.cors().and().authorizeRequests().and().sessionManagement();
-		}
-	}
-
 }
