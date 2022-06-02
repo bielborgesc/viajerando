@@ -7,6 +7,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "roadmap")
@@ -21,6 +23,15 @@ public class RoadMap {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_id", referencedColumnName = "id")
     private User user;
+
+    @ManyToMany
+    @JoinTable(
+            name = "destiny_enrolled",
+            joinColumns = @JoinColumn(name = "roadmap_id"),
+            inverseJoinColumns = @JoinColumn(name = "destiny_id")
+    )
+    public
+    Set<Destiny> enrolledDestiny = new HashSet<>();
 
     @Column(name = "total_price", nullable = false)
     private Double totalPrice;
@@ -77,4 +88,11 @@ public class RoadMap {
 
     public void setUser(User user) {this.user = user;}
 
+    public Set<Destiny> getEnrolledDestiny() {
+        return enrolledDestiny;
+    }
+
+    public void setEnrolledDestiny(Set<Destiny> enrolledDestiny) {
+        this.enrolledDestiny = enrolledDestiny;
+    }
 }

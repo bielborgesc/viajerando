@@ -1,7 +1,9 @@
 package com.viajerando.demo.controller;
 
+import com.viajerando.demo.entity.Destiny;
 import com.viajerando.demo.entity.RoadMap;
 import com.viajerando.demo.entity.User;
+import com.viajerando.demo.repository.DestinyRepository;
 import com.viajerando.demo.repository.RoadMapRepository;
 import com.viajerando.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +24,14 @@ public class RoadMapControlller {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    DestinyRepository destinyRepository;
+
     @GetMapping
     List<RoadMap> getRoadMaps() {return roadMapRepository.findAll();}
 
     @GetMapping("/{id}")
-    public ResponseEntity<RoadMap> getRoadMapById(@PathVariable(value = "id") Long roadMapId)
+     ResponseEntity<RoadMap> getRoadMapById(@PathVariable(value = "id") Long roadMapId)
             throws EntityNotFoundException {
         RoadMap roadMap =
                 roadMapRepository
@@ -47,8 +52,16 @@ public class RoadMapControlller {
         return roadMapRepository.save(roadMap);
     }
 
+    @PutMapping("/{roadmapId}/destiny/{destinyId}")
+    RoadMap addDestinyToRoadMap(@PathVariable Long roadmapId, @PathVariable Long destinyId) throws IllegalAccessException {
+        RoadMap roadMap = roadMapRepository.findById(roadmapId).orElseThrow(() -> new EntityNotFoundException("RoadMap not found on :: " + roadmapId));
+        Destiny destiny = destinyRepository.findById(destinyId).orElseThrow(() -> new EntityNotFoundException("RoadMap not found on :: " + destinyId));
+        roadMap.enrolledDestiny.add(destiny);
+        return roadMapRepository.save(roadMap);
+    }
+
     @PutMapping("/{id}")
-    public ResponseEntity<RoadMap> updateRoadMap(
+     ResponseEntity<RoadMap> updateRoadMap(
             @PathVariable(value = "id") Long roadMapId, @RequestBody RoadMap roadMapDetails)
             throws EntityNotFoundException {
 
@@ -68,7 +81,7 @@ public class RoadMapControlller {
     }
 
     @DeleteMapping("/{id}")
-    public Map<String, Boolean> deleteRoadMap(@PathVariable(value = "id") Long roadMapId) throws Exception {
+     Map<String, Boolean> deleteRoadMap(@PathVariable(value = "id") Long roadMapId) throws Exception {
         RoadMap roadMap =
                 roadMapRepository
                         .findById(roadMapId)
