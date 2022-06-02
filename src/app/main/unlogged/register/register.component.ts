@@ -1,3 +1,4 @@
+import { AlertModalService } from './../../../shared/components/alert-modal/alert-modal.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -23,6 +24,7 @@ export class RegisterComponent implements OnInit {
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router,
     private userService: UserService,
+    private alertService: AlertModalService
   ) { }
 
   ngOnInit(): void {
@@ -42,8 +44,12 @@ export class RegisterComponent implements OnInit {
       success => {
         localStorage.clear();
         localStorage.setItem("Authorization", Object.values(success)[0])
+        this.alertService.showAlertSuccess("Conta criada, efetue o login!");
+        this.router.navigate(['/auth/login'])
       },
-      () => {console.error("ERROR: Falha ao registrar!")}
+      () => {
+        this.alertService.showAlertDanger("Falha ao criar conta!");
+      }
     )
 
     console.log(this.registerForm);
