@@ -1,5 +1,6 @@
 package com.viajerando.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.viajerando.demo.utils.StatusEnum;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,7 +17,8 @@ public class RoadMap {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_id", referencedColumnName = "id")
     private User user;
 

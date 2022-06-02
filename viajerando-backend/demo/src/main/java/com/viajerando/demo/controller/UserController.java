@@ -13,18 +13,16 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/viajerando")
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
-    @GetMapping("/users")
-    public List<User> getAllUsers() {
-        return (List<User>) userRepository.findAll();
-    }
+    @GetMapping
+    List<User> getUsers() {return userRepository.findAll();}
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<User> getUsersById(@PathVariable(value = "id") Long userId)
             throws EntityNotFoundException {
         User user =
@@ -34,12 +32,10 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
-    @PostMapping("/user")
-    public User createUser(@Valid @RequestBody User user) {
-        return userRepository.save(user);
-    }
+    @PostMapping
+    public User createUser( @RequestBody User user) {return userRepository.save(user);}
 
-    @PutMapping("/user/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(
             @PathVariable(value = "id") Long userId, @Valid @RequestBody User userDetails)
             throws EntityNotFoundException {
@@ -64,7 +60,7 @@ public class UserController {
         return ResponseEntity.ok(updatedUser);
     }
 
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/{id}")
     public Map<String, Boolean> deleteUser(@PathVariable(value = "id") Long userId) throws Exception {
         User user =
                 userRepository

@@ -1,10 +1,12 @@
 package com.viajerando.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -43,7 +45,7 @@ public class User {
     private String telefone;
 
     @OneToMany(mappedBy = "user")
-    private List<RoadMap> roadMaps;
+    private Set<RoadMap> roadMaps;
 
     public long getId() {
         return id;
@@ -125,11 +127,11 @@ public class User {
         this.telefone = telefone;
     }
 
-    public List<RoadMap> getRoadMaps() {
+    public Set<RoadMap> getRoadMaps() {
         return roadMaps;
     }
 
-    public void setRoadMaps(List<RoadMap> roadMaps) {
+    public void setRoadMaps(Set<RoadMap> roadMaps) {
         this.roadMaps = roadMaps;
     }
 

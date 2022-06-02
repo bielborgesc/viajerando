@@ -1,30 +1,31 @@
 package com.viajerando.demo.controller;
 
 import com.viajerando.demo.entity.RoadMap;
+import com.viajerando.demo.entity.User;
 import com.viajerando.demo.repository.RoadMapRepository;
+import com.viajerando.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
-import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 
 @RestController
-@RequestMapping("/viajerando")
+@RequestMapping("/roadmaps")
 public class RoadMapControlller {
 
     @Autowired
-    private RoadMapRepository roadMapRepository;
+    RoadMapRepository roadMapRepository;
 
-    @GetMapping("/roadmaps")
-    public List<RoadMap> getAllRoadMaps() {
-        return roadMapRepository.findAll();
-    }
+    @Autowired
+    UserRepository userRepository;
 
-    @GetMapping("/roadmap/{id}")
+    @GetMapping
+    List<RoadMap> getRoadMaps() {return roadMapRepository.findAll();}
+
+    @GetMapping("/{id}")
     public ResponseEntity<RoadMap> getRoadMapById(@PathVariable(value = "id") Long roadMapId)
             throws EntityNotFoundException {
         RoadMap roadMap =
@@ -34,14 +35,21 @@ public class RoadMapControlller {
         return ResponseEntity.ok().body(roadMap);
     }
 
-    @PostMapping("/roadmap")
-    public RoadMap createRoadMap(@Valid @RequestBody RoadMap roadMap) {
+    @PostMapping
+    RoadMap createRoadMap(@RequestBody RoadMap roadMap) {return roadMapRepository.save(roadMap);}
+
+    @PutMapping("/{roadmapId}/user/{userId}")
+    RoadMap addRoadMapToUser(@PathVariable Long roadmapId, @PathVariable Long userId) throws IllegalAccessException {
+        RoadMap roadMap = roadMapRepository.findById(roadmapId).orElseThrow(() -> new EntityNotFoundException("RoadMap not found on :: " + roadmapId));
+        User user = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("RoadMap not found on :: " + userId));
+        if(roadMap.getUser() != null) throw new IllegalAccessException("This Entity has user");
+        roadMap.setUser(user);
         return roadMapRepository.save(roadMap);
     }
 
-    @PutMapping("/roadmap/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<RoadMap> updateRoadMap(
-            @PathVariable(value = "id") Long roadMapId, @Valid @RequestBody RoadMap roadMapDetails)
+            @PathVariable(value = "id") Long roadMapId, @RequestBody RoadMap roadMapDetails)
             throws EntityNotFoundException {
 
         RoadMap roadMap =
@@ -59,7 +67,7 @@ public class RoadMapControlller {
         return ResponseEntity.ok(updatedRoadMap);
     }
 
-    @DeleteMapping("/roadmap/{id}")
+    @DeleteMapping("/{id}")
     public Map<String, Boolean> deleteRoadMap(@PathVariable(value = "id") Long roadMapId) throws Exception {
         RoadMap roadMap =
                 roadMapRepository
