@@ -10,11 +10,11 @@
       <jdbc-url>jdbc:sqlite:viajerando.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="viajerando" uuid="c6de21bb-f8d3-449c-9464-560ddd35e86f">
+    <data-source source="LOCAL" name="viajerando" uuid="75e36a19-92d8-4c46-8483-6a5bea1bb94e">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:D:\Borges\Github\viajerando-project\viajerando.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:D:\Borges\Github\backend-viajerando\viajerando.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
       <libraries>
         <library>
