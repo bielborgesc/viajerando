@@ -67,6 +67,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         Map map =new LinkedHashMap(2);
         map.put("message","success");
         map.put("token", token);
+        map.put("type", "user");
 
         response.getWriter().write(map.toString());
         response.getWriter().flush();
