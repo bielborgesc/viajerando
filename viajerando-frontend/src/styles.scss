@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+$background-default: #ff910048;
+$carrot-orange-theme: #ff9100;
+$dark-carrot-orange-theme: #eb8501;
+$pacific-blue-theme: #47a8bd;
+$rich-black-theme: #000505;
+$gunmetal-theme: #022b3a;
+$baby-powder-theme: #fdfffc;
+
+$gradient-color-primary: linear-gradient(to bottom, #003366 91%, #ffffcc 100%);
+$gradient-color-secondary: linear-gradient(to top, #336699 91%, #ffffcc 100%);
+
+
+$title-font: 'Permanent Marker', cursive;
+
+
+body {
+  background: $background-default;
+}

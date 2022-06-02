@@ -1,21 +1,16 @@
+import { HomeModule } from './main/logged/home/home.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './pages/unlogged/auth/login/login.component';
-import { HomeComponent } from './pages/logged/home/home.component';
-import { RegisterComponent } from './pages/unlogged/auth/register/register.component';
 import { RouterModule } from '@angular/router';
-import { AuthModule } from './pages/unlogged/auth/auth.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    // LoginComponent,
-    // RegisterComponent,
-    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +18,8 @@ import { AuthModule } from './pages/unlogged/auth/auth.module';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    AuthModule
+    HttpClientModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

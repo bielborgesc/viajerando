@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+
+.form-bg {
+  background-color: rgba(36, 27, 15, 0.363);
+  padding: 2rem;
+  border-radius: 1.2rem;
+}
+
+label, button {
+  font-weight: 500;
+}
+
+button {
+  background-color: rgb(255, 136, 0);
+}
+
+.btn-login {
+  background-color: rgb(15, 76, 104);
+  color: #FFF;
+}
+
+.btn-register {
+  background-color: rgb(255, 136, 0);
+  color: #FFF;
+}
+
+button:hover {
+  transform: scale(1.015);
+}

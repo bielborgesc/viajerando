@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
 
   sendLoginForm(): void {
     console.log(this.loginForm)
+    this.router.navigate(['']);
   }
 
   goToRegister(): void {

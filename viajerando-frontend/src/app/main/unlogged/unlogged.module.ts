@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthComponent } from './auth.component';
-import { AuthRoutingModule } from './auth.routing';
+import { UnloggedComponent } from './unlogged.component';
+import { UnloggedRoutingModule } from './unlogged.routing';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -9,15 +9,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AuthComponent,
+    UnloggedComponent,
     LoginComponent,
     RegisterComponent
   ],
   imports: [
     CommonModule,
-    AuthRoutingModule,
+    UnloggedRoutingModule,
     ReactiveFormsModule
   ],
-  exports: [AuthComponent]
+  exports: [UnloggedComponent]
 })
-export class AuthModule { }
+export class UnloggedModule { }
