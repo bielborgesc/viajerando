@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+.login-area {
+  height: 100vh;
+
+  background-image: url("../../../assets/img/aviao-viajerando-2.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  .title {
+    padding: 0px 10px 30px 10px;
+    font-size: 60px;
+    // color: #FFF;
+    font-family: 'Permanent Marker', cursive;
+  }
+
+}

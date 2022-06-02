@@ -1,0 +1,32 @@
+<div class="form-bg">
+  <form [formGroup]="registerForm">
+    <div class="form-group">
+      <label for="inputName" class="text-white pb-2">Nome</label>
+      <input type="name" class="form-control" id="inputName" placeholder="Seu nome" formControlName="username">
+    </div>
+    <div class="form-group mt-1">
+      <label for="inputEmail" class="text-white pb-2">Email</label>
+      <input type="email" class="form-control" id="inputEmail" placeholder="Seu email" formControlName="email">
+    </div>
+    <div class="form-group mt-1">
+      <label for="inputPassword" class="text-white pb-2">Senha</label>
+      <input type="password" class="form-control" id="inputPassword" placeholder="Sua senha" formControlName="password">
+    </div>
+
+    <div class="mt-1 cpf-tel-area">
+      <div class="form-groug cpf-area">
+        <label for="inputCPF" class="text-white pb-2">CPF</label>
+        <input type="number" class="form-control" id="inputCPF" placeholder="Seu CPF" formControlName="cpf">
+      </div>
+      <div class="form-group tel-area">
+        <label for="inputTel" class="text-white pb-2">Telefone</label>
+        <input type="number" class="form-control" id="inputTel" placeholder="Seu telefone" formControlName="phonenumber">
+      </div>
+    </div>
+
+    <div class="buttons-area">
+      <button type="submit" class="btn mt-4 btn-login" (click)="sendRegisterForm()">Criar</button>
+      <button type="submit" class="btn mt-4 btn-register" (click)="goToLogin()">Login</button>
+    </div>
+  </form>
+</div>
