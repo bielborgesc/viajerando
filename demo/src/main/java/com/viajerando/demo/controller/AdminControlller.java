@@ -18,12 +18,12 @@ import java.util.Map;
 public class AdminControlller {
 
     @Autowired
-    private final AdminRepository adminRepository;
-//    private final PasswordEncoder encoder;
+    AdminRepository adminRepository;
+    private final PasswordEncoder encoder;
 
     public AdminControlller(AdminRepository adminRepository, PasswordEncoder encoder) {
         this.adminRepository = adminRepository;
-//        this.encoder = encoder;
+        this.encoder = encoder;
     }
 
 
@@ -42,7 +42,7 @@ public class AdminControlller {
 
     @PostMapping
     Admin createAdmin(@RequestBody Admin admin) {
-//        admin.setPassword(encoder.encode(admin.getPassword()));
+        admin.setPassword(encoder.encode(admin.getPassword()));
         admin.setPassword(admin.getPassword());
         return adminRepository.save(admin);
     }
