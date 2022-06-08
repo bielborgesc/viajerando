@@ -34,8 +34,10 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.get('password')?.value,
     };
 
+    console.log(userForm)
     this.userService.login(userForm).subscribe(
       success => {
+        console.log("success: ", success)
         localStorage.clear();
         localStorage.setItem("Authorization", Object.values(success)[0])
         this.alertService.showAlertSuccess("Login efetuado com sucesso!");

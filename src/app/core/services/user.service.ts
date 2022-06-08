@@ -16,15 +16,7 @@ export class UserService {
   ) { }
 
   login(userLoginForm: UserLogin) {
-    return this.http.post(`${environment.url}/users`, userLoginForm, {
-      headers: {
-        'Access-Control-Allow-Credentials': 'true',
-        'Access-Control-Allow-Headers': 'Content-Type, Accept, X-Requested-With, remember-me',
-        'Accept': 'application/json, text/plain, */*',
-        'content-type': 'application/json',
-        'Origin': 'localhost:4200'
-      }
-    })
+    return this.http.post(`${environment.url}/login`, {email: 'teste@teste.com', password: '1234'})
   }
 
   createAuthorizationHeader(headers: HttpHeaders) {
@@ -33,17 +25,7 @@ export class UserService {
   }
 
   createUser(userRegisterForm: UserRegister) {
-    const headersTeste = new HttpHeaders();
-
-    headersTeste.append('Access-Control-Allow-Credentials', 'true')
-    headersTeste.append('Access-Control-Allow-Headers', 'Content-Type, Accept, X-Requested-With, remember-me')
-    headersTeste.append('Accept', 'application/json, text/plain, */*')
-
-    console.log("Criando usuario service")
-    this.createAuthorizationHeader(headersTeste);
-    return this.http.post(`${environment.url}/users`, userRegisterForm, {
-      headers: headersTeste
-    })
+    return this.http.post(`${environment.url}/users`, userRegisterForm)
   }
 
   updateUser(userUpdateForm: any): any {
