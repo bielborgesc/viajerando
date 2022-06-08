@@ -18,7 +18,8 @@ const childrens = [
   {
     path: 'novo-roteiro',
     component: NewRoadmapComponent
-  }
+  },
+  { path: '**', redirectTo: 'lista-destinos'}
 ]
 
 const routes: Routes = [

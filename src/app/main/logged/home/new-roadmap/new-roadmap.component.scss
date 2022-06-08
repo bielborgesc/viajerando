@@ -1,0 +1,16 @@
+.new-roadmap-area {
+  max-width: 800px;
+  margin-top: 50px;
+
+  .form-area {
+    background-color: rgba(211, 214, 214, 0.274);
+    padding: 30px;
+    border-radius: 20px;
+    border: solid 2px rgba(149, 153, 153, 0.137);
+
+    button {
+      font-weight: 600;
+      background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 27%, rgba(5,109,187,1) 71%, rgba(0,212,255,1) 100%);
+    }
+  }
+}
