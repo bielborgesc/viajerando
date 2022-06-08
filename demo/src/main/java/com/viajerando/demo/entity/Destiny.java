@@ -35,11 +35,6 @@ public class Destiny {
     @ManyToMany(mappedBy = "enrolledDestiny")
     private Set<RoadMap> roadMaps = new HashSet<>();
 
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "admin_id", referencedColumnName = "id")
-    private Admin admin;
-
     public long getId() {
         return id;
     }
@@ -96,11 +91,4 @@ public class Destiny {
         this.roadMaps = roadMaps;
     }
 
-    public Admin getAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(Admin admin) {
-        this.admin = admin;
-    }
 }

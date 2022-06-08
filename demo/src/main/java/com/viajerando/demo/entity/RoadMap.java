@@ -44,10 +44,6 @@ public class RoadMap {
     @Column(name = "final_date",  nullable = false)
     private LocalDate finalDate;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private StatusEnum status;
-
     public long getId() {
         return id;
     }
@@ -73,6 +69,10 @@ public class RoadMap {
     }
 
     public Double getTotalPrice() {
+        double totalPrice = (double) 0;
+        for (Destiny destiny : enrolledDestiny) {
+            totalPrice = totalPrice + destiny.getPreco();
+        }
         return totalPrice;
     }
 
@@ -80,9 +80,6 @@ public class RoadMap {
         this.totalPrice = totalPrice;
     }
 
-    public StatusEnum getStatus() {return status;}
-
-    public void setStatus(StatusEnum status) {this.status = status;}
 
     public User getUser() {return user;}
 

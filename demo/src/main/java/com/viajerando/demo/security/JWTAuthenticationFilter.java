@@ -31,7 +31,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         this.authenticationManager = authenticationManager;
     }
 
-
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
@@ -64,12 +63,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXPIRACAO))
                 .sign(Algorithm.HMAC512(TOKEN_SENHA));
 
-        Map map =new LinkedHashMap(2);
-        map.put("message","success");
-        map.put("token", token);
-        map.put("type", "user");
-
-        response.getWriter().write(map.toString());
+        response.getWriter().write(token);
         response.getWriter().flush();
     }
 }

@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -44,8 +43,11 @@ public class UserController {
 
     @PostMapping
     public User createUser( @RequestBody User user) {
-        user.setPassword(encoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        if(userRepository.findByEmail(user.getEmail()).isEmpty()){
+            user.setPassword(encoder.encode(user.getPassword()));
+            return userRepository.save(user);
+        }
+        return (User) ResponseEntity.status(400);
     }
 
     @PutMapping("/{id}")
@@ -86,9 +88,7 @@ public class UserController {
     public ResponseEntity<Boolean> login(@RequestParam String email, @RequestParam String password) {
 
         Optional<User> optUsuario = userRepository.findByEmail(email);
-            System.out.println("Antes do if");
         if (optUsuario.isEmpty()) {
-            System.out.println("Entrou no vazio");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
         }
 
@@ -97,6 +97,11 @@ public class UserController {
 
         HttpStatus status = (valid) ? HttpStatus.OK : HttpStatus.UNAUTHORIZED;
         return ResponseEntity.status(status).body(valid);
+    }
+
+    @RequestMapping(method = RequestMethod.OPTIONS, value = "/login")
+    public ResponseEntity<Void> optionsLogin() {
+        return ResponseEntity.ok().build();
     }
 
 }

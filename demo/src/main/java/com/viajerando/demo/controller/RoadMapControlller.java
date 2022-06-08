@@ -66,6 +66,7 @@ public class RoadMapControlller {
         RoadMap roadMap = roadMapRepository.findById(roadmapId).orElseThrow(() -> new EntityNotFoundException("RoadMap not found on :: " + roadmapId));
         Destiny destiny = destinyRepository.findById(destinyId).orElseThrow(() -> new EntityNotFoundException("RoadMap not found on :: " + destinyId));
         roadMap.enrolledDestiny.add(destiny);
+        roadMap.setTotalPrice(roadMap.getTotalPrice());
         return roadMapRepository.save(roadMap);
     }
 
@@ -79,7 +80,6 @@ public class RoadMapControlller {
                         .findById(roadMapId)
                         .orElseThrow(() -> new EntityNotFoundException("RoadMap not found on :: " + roadMapId));
 
-        roadMap.setStatus(roadMapDetails.getStatus());
         roadMap.setInitialDate(roadMapDetails.getInitialDate());
         roadMap.setFinalDate(roadMapDetails.getFinalDate());
         roadMap.setTotalPrice(roadMapDetails.getTotalPrice());
