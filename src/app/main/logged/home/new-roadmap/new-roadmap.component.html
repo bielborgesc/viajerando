@@ -1,29 +1,19 @@
 <div class="container new-roadmap-area">
   <form class="form-area">
     <div class="form-group">
-      <label for="inputRoadmapNamel">Nome do roteiro</label>
-      <input type="text" class="form-control" id=""  placeholder="Enter email">
+      <label for="inputRoadmapName">Nome do roteiro</label>
+      <input type="text" class="form-control" id="inputRoadmapName" placeholder="Nome do roteiro">
     </div>
 
 
     <div>
       <label for="" class="mt-3">Selecione os destinos</label>
 
-      <div class="mt-2">
+      <div class="mt-2" *ngFor="let item of data">
 
         <div class="form-check mt-1">
           <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Maldivas - R$3.480,00</label>
-        </div>
-
-        <div class="form-check mt-1">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Dubai - R$7.990,00</label>
-        </div>
-
-        <div class="form-check mt-1">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Roma - R$4.990,00</label>
+          <label class="form-check-label" for="exampleCheck1">{{item.cidade}}/{{item.estado}} - R${{item.preco}}</label>
         </div>
 
       </div>
@@ -32,7 +22,7 @@
 
     <div class="d-flex justify-content-end">
       <h4 class="px-1">Preço total:</h4>
-      <h4 class="px-1">{{ 3480 + 7990 + 4990 | currency:'R$'}}</h4>
+      <h4 class="px-1">{{ 100000 | currency:'R$'}}</h4>
     </div>
 
 

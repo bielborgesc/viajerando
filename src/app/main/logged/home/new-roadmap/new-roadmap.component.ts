@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { DestinyService } from 'src/app/core/services/destiny.service';
 import { AlertModalService } from 'src/app/shared/components/alert-modal/alert-modal.service';
 
 @Component({
@@ -13,11 +14,20 @@ export class NewRoadmapComponent implements OnInit {
     
   })
 
+  data: any = [];
+  price: any = 0;
+
   constructor(
-    private alertService: AlertModalService
+    private alertService: AlertModalService,
+    private destinyService: DestinyService
   ) { }
 
   ngOnInit(): void {
+    this.destinyService.findAll().subscribe(
+      success => {
+        this.data = success;
+      }
+    )
   }
 
 }

@@ -9,27 +9,24 @@ import { environment } from 'src/environments/environment';
 })
 export class UserService {
 
-  // private readonly API: string = 'localhost:8080';
+  private readonly API: string = environment.url;
+  private readonly API_LOGIN = `${this.API}/login`;
+  private readonly API_USERS = `${this.API}/users`;
 
   constructor(
     private readonly http: HttpClient,
   ) { }
 
   login(userLoginForm: UserLogin) {
-    return this.http.post(`${environment.url}/login`, {email: 'teste@teste.com', password: '1234'})
-  }
-
-  createAuthorizationHeader(headers: HttpHeaders) {
-    headers.append('Authorization', 'Basic ' +
-      btoa('username:password'));
+    return this.http.post(this.API_LOGIN, {email: 'teste@teste.com', password: '1234'})
   }
 
   createUser(userRegisterForm: UserRegister) {
-    return this.http.post(`${environment.url}/users`, userRegisterForm)
+    return this.http.post(this.API_USERS, userRegisterForm)
   }
 
   updateUser(userUpdateForm: any): any {
-    return this.http.put(`${environment.url}/users`, {user: userUpdateForm})
+    return this.http.put(this.API_USERS, {user: userUpdateForm})
   }
 
 }

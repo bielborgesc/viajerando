@@ -1,4 +1,6 @@
+import { DestinyService } from './../../../../core/services/destiny.service';
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-destinations-list',
@@ -7,47 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DestinationsListComponent implements OnInit {
 
-  mock: any[] = [
-    {
-      id: 1,
-      name: 'Viagem 1',
-      imgPath: '../../../../../assets/img/aviao-viajerando-1.jpg',
-      description: 'Descrição da viagem',
-      date: '22/03/2023'
-    },
-    {
-      id: 2,
-      name: 'Viagem 2',
-      imgPath: '../../../../../assets/img/aviao-viajerando-1.jpg',
-      description: 'Descrição da viagem',
-      date: '22/03/2023'
-    },
-    {
-      id: 3,
-      name: 'Viagem 3',
-      imgPath: '../../../../../assets/img/aviao-viajerando-1.jpg',
-      description: 'Descrição da viagem',
-      date: '22/03/2023'
-    },
-    {
-      id: 4,
-      name: 'Viagem 4',
-      imgPath: '../../../../../assets/img/aviao-viajerando-1.jpg',
-      description: 'Descrição da viagem',
-      date: '22/03/2023'
-    },
-    {
-      id: 5,
-      name: 'Viagem 5',
-      imgPath: '../../../../../assets/img/aviao-viajerando-1.jpg',
-      description: 'Descrição da viagem',
-      date: '22/03/2023'
-    },
-  ]
+  data: any = [];
 
-  constructor() { }
+  constructor(
+    private destinyService: DestinyService
+  ) { }
 
   ngOnInit(): void {
+    this.destinyService.findAll().subscribe(
+      success => {
+        this.data = success
+      }
+    )
   }
 
 }
