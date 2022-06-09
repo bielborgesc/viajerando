@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class HttpsRequestInterceptor implements HttpInterceptor {
 
    intercept(req: HttpRequest<any>,next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log("Interceptando");
+   //  console.log("Interceptando");
 
       const token: string | null = localStorage.getItem('Authorization');
       const dupReq = req.clone({

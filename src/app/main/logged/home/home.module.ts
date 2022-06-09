@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { DestinationsListComponent } from './destinations-list/destinations-list.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -17,6 +18,7 @@ import { NewRoadmapComponent } from './new-roadmap/new-roadmap.component';
   imports: [
     CommonModule,
     HomeRoutingModule,
+    ReactiveFormsModule
   ],
   exports: [ HomeComponent ]
 })

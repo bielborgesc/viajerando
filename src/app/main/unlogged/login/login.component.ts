@@ -28,6 +28,16 @@ export class LoginComponent implements OnInit {
 
   }
 
+  parseJwt(token: any) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+};
+
   sendLoginForm(): void {
     const userForm: UserLogin = {
       email: this.loginForm.get('email')?.value,
@@ -38,6 +48,7 @@ export class LoginComponent implements OnInit {
       response => {
         localStorage.clear();
         localStorage.setItem("Authorization", response.toString());
+        localStorage.setItem("Username", this.parseJwt(response).sub)
         this.alertService.showAlertSuccess("Login efetuado com sucesso!");
         this.router.navigate([''])
       },

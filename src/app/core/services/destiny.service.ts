@@ -15,13 +15,7 @@ export class DestinyService {
   ) { }
 
   findAll() {
-    const token = localStorage.getItem("Authorization");
-
-    return this.http.get(this.API_DESTINIES, {
-      headers: {
-        "Bearer" : `Token ${token}`
-      }
-    });
+    return this.http.get(this.API_DESTINIES);
   }
 
 }
