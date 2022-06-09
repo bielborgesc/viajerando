@@ -34,26 +34,18 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.get('password')?.value,
     };
 
-    // console.log(userForm)
     this.userService.login(userForm).subscribe(
       response => {
-        console.log(response);
+        localStorage.clear();
+        localStorage.setItem("Authorization", response.toString());
+        this.alertService.showAlertSuccess("Login efetuado com sucesso!");
+        this.router.navigate([''])
       },
-      // error => console.log(error)
-    );
-    // this.userService.login(userForm).subscribe(
-    //   () => {
-    //     console.log("success: ")
-    //     localStorage.clear();
-    //     // localStorage.setItem("Authorization", Object.values(success)[0])
-    //     this.alertService.showAlertSuccess("Login efetuado com sucesso!");
-    //     this.router.navigate([''])
-    //   },
-    //   () => {
-    //     this.alertService.showAlertDanger("Falha efetuar login!")
-    //   },
-    //   () => {console.log("Teste")}
-    // )
+      () => {
+        this.alertService.showAlertDanger("Falha efetuar login!")
+      },
+      () => {console.log("Teste")}
+    )
 
     // console.log(this.loginForm);
 

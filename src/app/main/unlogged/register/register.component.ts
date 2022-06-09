@@ -42,6 +42,7 @@ export class RegisterComponent implements OnInit {
 
     this.userService.createUser(userForm).subscribe(
       success => {
+        localStorage.clear();
         this.alertService.showAlertSuccess("Conta criada, efetue o login!");
         this.router.navigate(['/auth/login'])
       },
