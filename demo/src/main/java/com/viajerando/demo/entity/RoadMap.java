@@ -1,7 +1,6 @@
 package com.viajerando.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.viajerando.demo.utils.StatusEnum;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 

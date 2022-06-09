@@ -3,8 +3,10 @@ package com.viajerando.demo.security;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.viajerando.demo.data.UserDetailData;
 import com.viajerando.demo.entity.User;
+import org.h2.util.json.JSONObject;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -63,7 +66,11 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXPIRACAO))
                 .sign(Algorithm.HMAC512(TOKEN_SENHA));
 
-        response.getWriter().write(token);
+        Gson gson = new Gson();
+        response.setContentType("text/json");
+        response.setCharacterEncoding("UTF-8");
+        response.setStatus(200);
+        response.getWriter().println(gson.toJson(token));
         response.getWriter().flush();
     }
 }
