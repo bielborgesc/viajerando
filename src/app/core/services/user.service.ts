@@ -18,7 +18,7 @@ export class UserService {
   ) { }
 
   login(userLoginForm: UserLogin) {
-    return this.http.post(this.API_LOGIN, {email: 'teste@teste.com', password: '1234'})
+    return this.http.post(this.API_LOGIN, userLoginForm)
   }
 
   createUser(userRegisterForm: UserRegister) {

@@ -34,8 +34,8 @@ export class RegisterComponent implements OnInit {
   sendRegisterForm(): void {
     const userForm: UserRegister = {
       username: this.registerForm.get('username')?.value,
-      password: this.registerForm.get('email')?.value,
-      email: this.registerForm.get('password')?.value,
+      password: this.registerForm.get('password')?.value,
+      email: this.registerForm.get('email')?.value,
       cpf: this.registerForm.get('cpf')?.value,
       telefone: this.registerForm.get('phonenumber')?.value
     };
