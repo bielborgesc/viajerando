@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { DestinyService } from 'src/app/core/services/destiny.service';
 import { AlertModalService } from 'src/app/shared/components/alert-modal/alert-modal.service';
+import { parseJwt } from 'src/app/shared/utils/parseJson';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-new-roadmap',
@@ -26,7 +28,8 @@ export class NewRoadmapComponent implements OnInit {
   constructor(
     private alertService: AlertModalService,
     private destinyService: DestinyService,
-    private roadmapService: RoadmapService
+    private roadmapService: RoadmapService,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -50,17 +53,42 @@ export class NewRoadmapComponent implements OnInit {
 
   createRoadmap() {
     const newRoadmap = {
-      name: this.newRoadmapForm.get('name').value,
+      name: this.newRoadmapForm.get('name')?.value,
+      totalPrice: 0.0,
+      initialDate: this.newRoadmapForm.get('initialDate')?.value,
+      finalDate: this.newRoadmapForm.get('finalDate')?.value
     }
-    console.log(newRoadmap);
-    // this.roadmapService.newRoadmap(this.newRoadmapForm).subscribe(
-    //   success => {
-    //     console.log("CERTO: ", success)
-    //   },
-    //   error => {
-    //     console.log("ERROR: ", error)
-    //   }
-    // )
+
+    let idUser = localStorage.getItem('idUser');
+
+    let ids = this.arrDestinies.join('-');
+
+    this.roadmapService.newRoadmap(newRoadmap).subscribe(
+      success => {
+        const res: any = success;
+        console.log("CERTO: ", res.id)
+
+        this.roadmapService.roadmapInUser(res.id, idUser).subscribe(
+          response => {
+            let roadmap: any = response;
+
+            if (this.arrDestinies.length > 0) {
+              this.arrDestinies.forEach(id => {
+                this.roadmapService.addDestiniesInRoadmap(roadmap.id, id).subscribe(
+                  success => {
+                    console.log("Aqui")
+                  },
+                  error => console.log("Deu ruim")
+                );
+              })
+            }
+          }
+        )
+      },
+      error => {
+        console.log("ERROR: ", error)
+      }
+    )
   }
 
 }

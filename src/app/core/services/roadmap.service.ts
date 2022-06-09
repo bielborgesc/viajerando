@@ -9,13 +9,21 @@ export class RoadmapService {
 
   private readonly API: string = environment.url;
   private readonly API_ROADMAP: string = `${this.API}/roadmaps`;
+  private readonly API_ROADMAP_USER: string = `${this.API_ROADMAP}`
 
   constructor(
     private readonly http: HttpClient,
   ) { }
 
   newRoadmap(roadmap: any) {
-    // console.log(roadmap, " teste")
     return this.http.post(this.API_ROADMAP, roadmap);
+  }
+
+  roadmapInUser(idRoadMap: number, idUser: number | null | string) {
+    return this.http.put(`${this.API_ROADMAP}/${idRoadMap}/user/${idUser}`, {});
+  }
+
+  addDestiniesInRoadmap(idRoadmap: any, idDestiny: any) {
+    return this.http.put(`${this.API_ROADMAP}/${idRoadmap}/destiny/${idDestiny}`, {});
   }
 }

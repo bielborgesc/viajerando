@@ -29,4 +29,12 @@ export class UserService {
     return this.http.put(this.API_USERS, {user: userUpdateForm})
   }
 
+  getUserById(idUser: any) {
+    return this.http.get(`${this.API_USERS}/${idUser}`);
+  }
+
+  getUserByEmail(email: string): any {
+    return this.http.get(`${this.API_USERS}/buscar/${email}`);
+  }
+
 }
