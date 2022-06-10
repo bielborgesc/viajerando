@@ -16,7 +16,9 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.username = localStorage.getItem("Username");
+    setTimeout(() => {
+      this.username = localStorage.getItem("Username");
+    })
   }
 
   exit(): void{

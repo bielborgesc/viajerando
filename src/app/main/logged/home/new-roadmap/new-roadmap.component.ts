@@ -68,20 +68,20 @@ export class NewRoadmapComponent implements OnInit {
         const res: any = success;
         console.log("CERTO: ", res.id)
 
-        this.roadmapService.roadmapInUser(res.id, idUser).subscribe(
-          response => {
-            let roadmap: any = response;
-
-            if (this.arrDestinies.length > 0) {
-              this.arrDestinies.forEach(id => {
-                this.roadmapService.addDestiniesInRoadmap(roadmap.id, id).subscribe(
-                  success => {
-                    console.log("Aqui")
-                  },
-                  error => console.log("Deu ruim")
-                );
-              })
-            }
+        this.roadmapService.roadmapInUser(res.id, idUser, this.arrDestinies).subscribe(
+          () => {
+            this.alertService.showAlertSuccess("Roteiro criado!");
+            // let roadmap: any = ;
+            // if (this.arrDestinies.length > 0) {
+            //   this.arrDestinies.forEach(id => {
+            //     this.roadmapService.addDestiniesInRoadmap(roadmap.id, id).subscribe(
+            //       success => {
+            //         console.log("Aqui")
+            //       },
+            //       error => console.log("Deu ruim")
+            //     );
+            //   })
+            // }
           }
         )
       },

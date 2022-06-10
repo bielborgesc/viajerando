@@ -1,50 +1,27 @@
-<section class="content container">
+<section class="content container" *ngFor="let item of arrRoadmap">
 
     <div class="mt-4 d-flex justify-content-center">
       <div class="card col-md-9">
-        <h5 class="card-header">Nome do roteiro</h5>
+        <h5 class="card-header">{{ item.name }}</h5>
         <div class="card-body">
-          <h5 class="card-title">Valor: R$ 14.300,90</h5>
-          <p class="card-text">Rotas</p>
+          <h5 class="card-title">{{ item.totalPrice | currency: 'R$' }}</h5>
 
-          <div class="card">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Maldivas</li>
-              <li class="list-group-item">Roma</li>
-              <li class="list-group-item">Argentina</li>
-            </ul>
+          <div *ngIf="item.enrolledDestiny.lenght > 0">
+            <p class="card-text">Rotas</p>
+
+            <div class="card" >
+              <ul class="list-group list-group-flush" *ngFor="let elem of item.enrolledDestiny">
+                <li class="list-group-item">{{ elem.cidade }}</li>
+              </ul>
+            </div>
           </div>
 
           <div class="buttons-area d-flex">
-            <a href="#" class="btn btn-primary mt-3 p-1">Editar</a>
-            <a href="#" class="btn btn-danger mt-3 p-1">Excluir</a>
+            <!-- <a href="#" class="btn btn-primary mt-3 p-1">Editar</a> -->
+            <a class="btn btn-danger mt-3 p-1" (click)="deleteRoadmap(item.id)">Excluir</a>
           </div>
         </div>
       </div>
     </div>
-
-
-  <div class="mt-4 d-flex justify-content-center">
-    <div class="card col-md-9">
-      <h5 class="card-header">Nome do roteiro</h5>
-      <div class="card-body">
-        <h5 class="card-title">Valor: R$ 14.300,90</h5>
-        <p class="card-text">Rotas</p>
-
-        <div class="card">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Maldivas</li>
-            <li class="list-group-item">Roma</li>
-            <li class="list-group-item">Argentina</li>
-          </ul>
-        </div>
-
-        <div class="buttons-area d-flex">
-          <a href="#" class="btn btn-primary mt-3 p-1">Editar</a>
-          <a href="#" class="btn btn-danger mt-3 p-1">Excluir</a>
-        </div>
-      </div>
-    </div>
-  </div>
 
 </section>

@@ -48,12 +48,13 @@ export class LoginComponent implements OnInit {
 
     let id: any = null;
 
-    await this.userService.login(userForm).subscribe(
+    return this.userService.login(userForm).subscribe(
       response => {
         localStorage.clear();
         localStorage.setItem("Authorization", response.toString());
         localStorage.setItem("idUser", parseJwt(response).sub)
         id = parseJwt(response).sub;
+        this.addName(id);
         console.log(parseJwt(response))
         this.alertService.showAlertSuccess("Login efetuado com sucesso!");
         this.router.navigate([''])
@@ -61,10 +62,21 @@ export class LoginComponent implements OnInit {
       () => {
         this.alertService.showAlertDanger("Falha efetuar login!")
       },
-      () => {console.log("Teste")}
     )
 
-    return this.userService.getUserById(id).subscribe(
+    // return await this.userService.getUserById(id).subscribe(
+    //   response => {
+    //     const res: any = response;
+    //     localStorage.setItem("Username", res.username);
+    //   },
+    //   error => {
+    //     console.error("ERROR: ", error)
+    //   }
+    // )
+  }
+
+  addName(id: any) {
+    return  this.userService.getUserById(id).subscribe(
       response => {
         const res: any = response;
         localStorage.setItem("Username", res.username);
