@@ -1,5 +1,6 @@
 package com.viajerando.demo.controller;
 
+import com.google.gson.Gson;
 import com.viajerando.demo.entity.User;
 import com.viajerando.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +42,34 @@ public class UserController {
                         .findById(userId)
                         .orElseThrow(() -> new EntityNotFoundException("User not found on :: " + userId));
         return ResponseEntity.ok().body(user);
+    }
+
+    @GetMapping("/buscar/{email}")
+    public void getUsersByEmail(@PathVariable(value = "email") String userEmail, HttpServletResponse response) throws EntityNotFoundException, IOException {
+        User user = userRepository.findByEmail(userEmail)
+                                    .orElseThrow(() -> new EntityNotFoundException("User not found on :: " + userEmail));
+
+
+        Gson gson = new Gson();
+        response.setContentType("text/json");
+        response.setCharacterEncoding("UTF-8");
+
+        response.getWriter().println(gson.toJson(user.getUsername()));
+        response.getWriter().println(gson.toJson(user.getId()));
+        response.getWriter().flush();
+    }
+
+    @GetMapping("/buscar/id/{email}")
+    public void getUsersByEmailWithId(@PathVariable(value = "email") String userEmail, HttpServletResponse response) throws EntityNotFoundException, IOException {
+        User user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new EntityNotFoundException("User not found on :: " + userEmail));
+
+        Gson gson = new Gson();
+        response.setContentType("text/json");
+        response.setCharacterEncoding("UTF-8");
+
+        response.getWriter().println(gson.toJson(user.getId()));
+        response.getWriter().flush();
     }
 
     @PostMapping

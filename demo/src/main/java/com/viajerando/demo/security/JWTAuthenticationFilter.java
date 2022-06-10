@@ -61,8 +61,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         UserDetailData userDetailData = (UserDetailData) authResult.getPrincipal();
 
-        String token = JWT.create().
-                withSubject(userDetailData.getUsername())
+        String token = JWT.create()
+                .withSubject(Integer.toString((int) userDetailData.getId()))
+//                .withSubject(userDetailData.getEmail())
                 .withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXPIRACAO))
                 .sign(Algorithm.HMAC512(TOKEN_SENHA));
 
@@ -71,6 +72,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.setCharacterEncoding("UTF-8");
         response.setStatus(200);
         response.getWriter().println(gson.toJson(token));
+//        response.getWriter().println(gson.toJson(userDetailData.getUsername()));
         response.getWriter().flush();
     }
 }

@@ -29,7 +29,15 @@ public class UserDetailData implements UserDetails {
 
     @Override
     public String getUsername() {
+        return user.orElse(new User()).getUsername();
+    }
+
+    public String getEmail() {
         return user.orElse(new User()).getEmail();
+    }
+
+    public long getId() {
+        return user.orElse(new User()).getId();
     }
 
     @Override

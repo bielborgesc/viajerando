@@ -19,9 +19,12 @@ public class RoadMap {
     private long id;
 
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name="user_id", referencedColumnName = "id")
     private User user;
+
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @ManyToMany
     @JoinTable(
@@ -90,5 +93,13 @@ public class RoadMap {
 
     public void setEnrolledDestiny(Set<Destiny> enrolledDestiny) {
         this.enrolledDestiny = enrolledDestiny;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
