@@ -79,3 +79,5 @@ This application demonstrates how a full-stack application works, with a simple 
 ## :raising_hand_man: Developers
 
 Gabriel Carvalho
+Fagner Viana
+Jackson de Almeida
