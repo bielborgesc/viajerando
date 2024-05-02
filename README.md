@@ -1,37 +1,29 @@
-# Viajerando-Project
-Viajerando é um site de compra e reserva de viagem através de roteiros.
+### :heavy_check_mark: FINISHED
+#### :notebook: [Interface] Event Scheduling
+# :airplane: Viajerando
 
-Tem a capacidade de criar novos roteiros e destinos.
+## :mag: Objective
+Viajerando is a website for purchasing and booking travel through itineraries. It has the ability to create new itineraries and destinations. It lists, edits, and deletes existing destinations. It also lists, edits, and deletes existing itineraries. Users must be logged in to access system functionalities such as creating itineraries, listing their itineraries, editing their itineraries, and deleting itineraries. Destinations are registered by an internal administrator.
 
-Lista, edita e exclui os destinos existentes.
+## :computer: Development
+Its database works as follows:
+1 to N Relationship
 
-Lista, edita e exclui os roteiros existentes.
+User Creates at least 0 and at most n Itineraries and an Itinerary is created by a single user:
 
-O usuário terá que estar logado para acessar as funcionalidades do sistema como, criar roteiros, listar seus roteiros, editar seus roteiros, excluir roteiro.
-
-Os destinos são cadastrados por administrador interno
-
- 
-
-Relacionamento 1 para N
-
-Usuário Cria no mínimo 0 e no máximo n Roteiro e um Roteiro é criado por um único usuário:
-
-Tabela: Roteiro
+Table: Itinerary
 
 id - (PK) int
 
-precoAcumulado - double
+accumulatedPrice - double
 
-dataInicial - date
+startDate - date
 
-dataFinal - date
+endDate - date
 
-idUser - (FK de user) int
+idUser - (FK from user) int
 
- 
-
-Tabela: Usuario
+Table: User
 
 username - string
 
@@ -41,47 +33,49 @@ id – (PK) int
 
 cpf - string
 
-telefone - string
+phone - string
 
- 
+N to N Relationship
 
-Relacionamento N para N
+Itinerary has at least 0 and at most n Destinations and Destinations can be in 0 or n Itineraries
 
-Roteiro possui no mínimo 0 e no máximo n Destinos e Destinos pode estar em 0 ou n Roteiros
-
- 
-
-Tabela: Destino
+Table: Destination
 
 id - (PK) int
 
-cidade - string
+city - string
 
-estado - string
+state - string
 
-preco - double
+price - double
 
-emabrgue - string
+boarding - string
 
-descricao - string
+description - string
 
- 
+Table Possesses
 
-Tabela Possui
+fkItinerary - int
 
-fkRoteiro - int
+fkDestination - int
 
-fkDestino -int
+The collection of Endpoints is in a file here in the folder, it can be submitted in the POSTMAN application where you can see all the routes created. It is also available at the link: https://www.getpostman.com/collections/625aad9fbd4a4937907c.
 
- 
+Frontend GitHub Repository: https://github.com/bielborgesc/front-end-viajerando.
+Backend GitHub Repository: https://github.com/bielborgesc/backend-viajerando.
 
-Colection dos EndPoints está em um arquivo aqui dentro da pasta, ela pode ser submetida no aplicativo POSTMAN onde será possível ver todas as rotas criadas. Ela também está disponível no link:  https://www.getpostman.com/collections/625aad9fbd4a4937907c.
+## :arrow_forward: Run the code
 
-Repositório Frontend GitHub: https://github.com/bielborgesc/front-end-viajerando.
-Repositório Backend GitHub: https://github.com/bielborgesc/backend-viajerando.
+* To run the project, first open the Backend in the IntelliJ IDE and execute the DemoApplication file which will start running on port 8080.
 
-*Para rodar o projeto primeira deve se abrir o Backend na IDE Intelij e executar o arquivo DemoApplication que começará a rodar na porta 8080.
+* Then you need to open the Frontend in Visual Studio Code IDE, open your terminal, and with Node installed on your machine, run the command "npm install" to install Angular dependencies on your machine. Once the installation is complete, just type the command "npm start" and the application will start running on port 4200 of your localhost.
 
-*Depois é necessário abrir o Frontend na IDE Visual Studio o Code, abrir seu terminar e com o Node instalado na máquina executar o comando “npm install” para instalar as dependências do angular na sua máquina. Assim que finalizar a instalação é só digitar o comando “npm start” e a aplicação irá começar a rodar na porta 4200 do seu localhost.
+* With both services running, you will be able to execute commands on the platform.
 
-*Com os dois serviços rodando você irá conseguir realizar os comandos da plataforma.
+## :heavy_check_mark: Concluding
+
+This application demonstrates how a full-stack application works, with a simple example of travel itineraries.
+
+## :raising_hand_man: Developers
+
+Gabriel Carvalho
