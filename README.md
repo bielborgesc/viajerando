@@ -1,5 +1,5 @@
 ### :heavy_check_mark: FINISHED
-#### :notebook: [Interface] Event Scheduling
+#### :notebook: Full Stack Work
 # :airplane: Viajerando
 
 ## :mag: Objective
